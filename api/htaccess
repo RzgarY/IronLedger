@@ -1,0 +1,7 @@
+# Many shared hosts (InfinityFree included) run PHP in a mode where the
+# Authorization header is stripped before it ever reaches your PHP scripts.
+# This rule tells Apache to forward it explicitly, which fixes
+# "Not authenticated" errors that happen right after a successful login.
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%1]
